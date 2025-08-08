@@ -1,0 +1,28 @@
+{
+  "name": "react-projects",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
+    "@tinymce/tinymce-react": "^6.2.1",
+    "appwrite": "^18.1.1",
+    "html-react-parser": "^5.2.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.60.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.7.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.6.0",
+    "autoprefixer": "^10.4.21",
+    "vite": "^7.0.4"
+  },
+  "description": ""
+}
