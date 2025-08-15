@@ -6,9 +6,10 @@ export default function Login({ onLogin }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-   // <== Add onRegister here
-   const onRegister = () => {
-    alert("You clicked Create an account! Implement registration here.");
+   // Use the switchToRegister prop passed from parent
+   const handleRegisterClick = (e) => {
+    e.preventDefault();
+    onRegister && onRegister();
   };
 
   const handleLogin = async (e) => {
@@ -114,7 +115,7 @@ export default function Login({ onLogin }) {
         <div className="mt-6">
           <button
             type="button"
-            onClick={onRegister}
+            onClick={handleRegisterClick}
             className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
           >
             Create an account

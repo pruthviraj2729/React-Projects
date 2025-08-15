@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import authService from "../appwrite/auth";
 
-export default function Register({ onRegister }) {
+export default function Register({ onRegister, onSuccess, switchToLogin }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,14 +17,14 @@ export default function Register({ onRegister }) {
       // Automatically log in after successful registration
       try {
         await authService.login(email, password);
-        // Call onLogin to update the parent component's state
-        onRegister && onRegister();
+        // Call onSuccess to handle successful registration
+        onSuccess && onSuccess();
       } catch (loginError) {
         console.error('Auto-login after registration failed:', loginError);
         // If auto-login fails, still consider registration successful but show a message
         setError('Account created successfully! Please log in.');
-        // Still call onRegister to switch to login form
-        onRegister && onRegister();
+        // Still call onSuccess to handle the success case
+        onSuccess && onSuccess();
       }
     } catch (error) {
       console.error('Registration error:', error);
@@ -92,7 +92,7 @@ export default function Register({ onRegister }) {
       </form>
       <div className="mt-4 text-center">
         <button
-          onClick={() => onRegister()}
+          onClick={switchToLogin}
           className="text-blue-500 hover:text-blue-600 text-sm font-medium"
         >
           Already have an account? Login

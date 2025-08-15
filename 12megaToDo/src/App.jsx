@@ -82,6 +82,12 @@ function App() {
     setError(null);
   }, []);
 
+  // Handle successful registration
+  const handleRegisterSuccess = useCallback(() => {
+    setShowRegister(false);
+    setError('Registration successful! Please log in.');
+  }, []);
+
   // Show loading state
   if (loading) {
     return (
@@ -171,9 +177,16 @@ function App() {
             </div>
             <div className="p-8">
               {showRegister ? (
-                <Register onSuccess={handleLogin} switchToLogin={() => setShowRegister(false)} />
+                <Register 
+                  onRegister={handleLogin} 
+                  onSuccess={handleRegisterSuccess} 
+                  switchToLogin={() => setShowRegister(false)} 
+                />
               ) : (
-                <Login onSuccess={handleLogin} switchToRegister={() => setShowRegister(true)} />
+                <Login 
+                  onLogin={handleLogin} 
+                  onRegister={() => setShowRegister(true)}
+                />
               )}
             </div>
           </div>
