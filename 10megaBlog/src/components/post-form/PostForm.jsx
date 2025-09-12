@@ -23,12 +23,12 @@ export default function PostForm({ post }) {
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
 
             if (file) {
-                appwriteService.deleteFile(post.featuredImage);
+                appwriteService.deleteFile(post.featuredimage);
             }
 
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
-                featuredImage: file ? file.$id : undefined,
+                featuredimage: file ? file.$id : post.featuredimage,
             });
 
             if (dbPost) {
@@ -39,8 +39,10 @@ export default function PostForm({ post }) {
 
             if (file) {
                 const fileId = file.$id;
-                data.featuredImage = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
+                data.featuredimage = fileId;
+                data.userid = userData.$id;  // note lowercase 'userid'
+
+                const dbPost = await appwriteService.createPost(data);
 
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
@@ -48,6 +50,8 @@ export default function PostForm({ post }) {
             }
         }
     };
+
+
 
     const slugTransform = useCallback((value) => {
         if (value && typeof value === "string")
